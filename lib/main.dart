@@ -194,34 +194,35 @@ class _NavBarPageState extends State<NavBarPage> {
               ],
             ),
           ),
-          FloatingNavbarItem(
-            customWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.qr_code,
-                  color:
-                      currentIndex == 5 ? Color(0xFF31B610) : Color(0xFF248B0A),
-                  size: 24,
-                ),
-              ],
-            ),
-          ),
-          FloatingNavbarItem(
-            customWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.home_outlined,
-                  color:
-                      currentIndex == 6 ? Color(0xFF31B610) : Color(0xFF248B0A),
-                  size: 24,
-                ),
-              ],
-            ),
-          )
+          // FloatingNavbarItem(
+          //   customWidget: Column(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: [
+          //       Icon(
+          //         Icons.qr_code,
+          //         color:
+          //             currentIndex == 5 ? Color(0xFF31B610) : Color(0xFF248B0A),
+          //         size: 24,
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // FloatingNavbarItem(
+          //   customWidget: Column(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: [
+          //       Icon(
+          //         Icons.home_outlined,
+          //         color:
+          //             currentIndex == 6 ? Color(0xFF31B610) : Color(0xFF248B0A),
+          //         size: 24,
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );
   }
 }
+

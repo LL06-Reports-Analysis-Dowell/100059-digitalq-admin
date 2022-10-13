@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 
 class ReportWidget extends StatefulWidget {
   const ReportWidget({Key? key}) : super(key: key);
@@ -100,50 +101,55 @@ class _ReportWidgetState extends State<ReportWidget> {
                                     color: Colors.white,
                                   ),
                                 ),
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.9,
-                                  height: 300,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                  ),
-                                  child: Card(
-                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    color: Colors.white,
-                                    elevation: 8,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
+                                InkWell(
+                                  onTap: () {
+                                 QRcodeScanner(context);
+                                  },
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.9,
+                                    height: 300,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
                                     ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Expanded(
-                                          child: Align(
-                                            alignment:
-                                                AlignmentDirectional(0, 0),
-                                            child: Container(
-                                              width: 100,
-                                              height: 100,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                shape: BoxShape.rectangle,
-                                              ),
-                                              child: Stack(
-                                                children: [
-                                                  Image.asset(
-                                                    'assets/images/Playstore_logo_(2).png',
-                                                    width: 100,
-                                                    height: 100,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ],
+                                    child: Card(
+                                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                                      color: Colors.white,
+                                      elevation: 8,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Expanded(
+                                            child: Align(
+                                              alignment:
+                                                  AlignmentDirectional(0, 0),
+                                              child: Container(
+                                                width: 100,
+                                                height: 100,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  shape: BoxShape.rectangle,
+                                                ),
+                                                child: Stack(
+                                                  children: [
+                                                    Image.asset(
+                                                      'assets/images/Playstore_logo_(2).png',
+                                                      width: 100,
+                                                      height: 100,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -170,4 +176,30 @@ class _ReportWidgetState extends State<ReportWidget> {
       ),
     );
   }
+}
+
+
+Future QRcodeScanner(BuildContext context) {
+  return showDialog(
+      context: context,
+      builder: (BuildContext context) => new AlertDialog(
+            title: new Text('Scan for QR codes'),
+            actions: <Widget>[
+              new IconButton(
+                  icon: new Icon(Icons.close),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  })
+            ],
+            content: MobileScanner(
+                allowDuplicates: false,
+                onDetect: (barcode, args) {
+                  if (barcode.rawValue == null) {
+                    debugPrint('Failed to scan Barcode');
+                  } else {
+                    final String code = barcode.rawValue!;
+                    debugPrint('Barcode found! $code');
+                  }
+                }),
+          ));
 }
